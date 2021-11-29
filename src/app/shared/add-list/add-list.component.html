@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{data.name}}</h2>
+<mat-dialog-content>
+  <form *ngIf="data.name == 'Add List'" [formGroup]="form">
+    <mat-form-field  appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="list_name"/>
+      <mat-error>Name Required</mat-error>
+    </mat-form-field>
+  </form>
+
+  <form *ngIf="data.name == 'Add Task'" [formGroup]="taskForm">
+    <mat-form-field  appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title"/>
+      <mat-error>Name Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field  appearance="outline">
+      <mat-label>Time</mat-label>
+      <input matInput formControlName="updateTime"/>
+      <mat-error>Time Required</mat-error>
+    </mat-form-field>
+
+    <div class="mb-3">
+      <label class="me-3">Priority: <small class="text-danger">*</small></label>
+      <mat-radio-group formControlName="priority" *ngFor="let priority of priorityList">
+        <mat-radio-button class="me-2" [value]="priority">{{priority}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close="false">Cancel</button>
+  <button *ngIf="data.name == 'Add List'" mat-flat-button color="primary" (click)="action()" [disabled]="form.invalid">Add</button>
+  <button *ngIf="data.name == 'Add Task'" mat-flat-button color="primary" (click)="action()" [disabled]="taskForm.invalid">Add</button>
+</mat-dialog-actions>

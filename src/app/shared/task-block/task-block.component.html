@@ -1,0 +1,25 @@
+<div cdkDropList #todoy="cdkDropList" [cdkDropListData]="list"
+		[cdkDropListConnectedTo]=connectedTo (cdkDropListDropped)="drop($event)">
+		<div>
+			<mat-toolbar>
+				<span>{{name}}</span>
+				<span class="example-spacer"></span>
+				<button (click)="addTask()"  class="example-icon favorite-icon" mat-button mat-raised-button color="accent">Add Task</button>
+			  </mat-toolbar>
+		</div>
+	
+	
+		<div *ngFor="let item of list; let ii = index" class="task"
+			[ngClass]="{'priorityHigh': item.priority == 'High', 'priorityMedium': item.priority == 'Medium', 'priorityLow': item.priority == 'Low'}"
+			cdkDrag>
+			<div class="card" style="xwidth: 18rem;" (click)="checkItem(item)">
+				<div class="card-body">
+					<p class="card-text" style="margin:0px">{{item.title}} </p>
+					<p>{{item.updateTime}}
+						<i class="far fa-edit" style="float:right"></i>
+						<i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue" (click)="trash(list,ii)"></i>
+					</p>
+				</div> <!-- card body -->
+			</div> <!-- card -->
+		</div> <!-- ngfor -->
+</div>
